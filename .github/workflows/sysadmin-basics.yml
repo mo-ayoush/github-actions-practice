@@ -8,6 +8,11 @@ jobs:
   test-job:
     runs-on: ubuntu-latest
 
+    env:
+      APP_NAME: my-app
+      TARGET_ENV: dev
+      REGION: eu-central
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -17,3 +22,16 @@ jobs:
           echo "Hello from GitHub Actions"
           date
           uname -a
+
+      - name: Show variables
+        run: |
+          echo "App Name: $APP_NAME"
+          echo "Environment: $TARGET_ENV"
+          echo "Region: $REGION" 
+
+      - name: Create runtime info
+        run: |
+          mkdir -p reports
+          echo "APP=$APP_NAME" > reports/runtime-info.txt
+          echo "ENV=$TARGET_ENV" >> reports/runtime-info.txt
+          echo "REGION=$REGION" >> reports/runtime-info.txt
