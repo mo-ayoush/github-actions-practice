@@ -58,3 +58,14 @@ jobs:
            else
             echo "SSH_TARGET: present"
            fi
+           
+      - name: Select Environment
+        run: |
+           if [ "${GITHUB_REF##*/}" = "main" ]; then
+            echo "ENV=prod" >> $GITHUB_ENV
+            echo "Production mode"
+           else
+            echo "ENV=dev" >> $GITHUB_ENV
+            echo "Development mode"
+           fi
+           
