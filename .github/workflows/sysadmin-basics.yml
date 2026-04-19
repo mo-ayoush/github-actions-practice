@@ -41,3 +41,20 @@ jobs:
         with:
           name: workflow-reports
           path: reports/
+
+      - name: Check Secrets
+        env:
+          CLOUD_API_TOKEN: ${{ secrets.CLOUD_API_TOKEN }}
+          SSH_TARGET: ${{ secrets.SSH_TARGET }}
+        run: |
+          if [ -z "$CLOUD_API_TOKEN" ]; then
+           echo "CLOUD_API_TOKEN: missing"
+          else
+           echo "CLOUD_API_TOKEN: present"
+          fi
+
+           if [ -z "$SSH_TARGET" ]; then
+            echo "SSH_TARGET: missing"
+           else
+            echo "SSH_TARGET: present"
+           fi
