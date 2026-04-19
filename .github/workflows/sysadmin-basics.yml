@@ -68,4 +68,15 @@ jobs:
             echo "ENV=dev" >> $GITHUB_ENV
             echo "Development mode"
            fi
+
+      - name: Load Config
+        run: |
+           if [ "$ENV" = "prod" ]; then
+            FILE="config/prod.env"
+           else
+            FILE="config/dev.env"
+            fi
+
+            echo "Using: $FILE"
+            cat $FILE
            
